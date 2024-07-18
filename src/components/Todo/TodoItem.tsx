@@ -1,4 +1,4 @@
-type TodoItemProps = {
+export type TodoItemProps = {
   title: string;
   content: string;
 };
