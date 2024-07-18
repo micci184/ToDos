@@ -1,12 +1,30 @@
+type Status = "Done" | "Progress" | "Incomplete";
+
 export type TodoItemProps = {
   title: string;
   content: string;
+  status: Status;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ title, content }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ title, content, status }) => {
+  let statusColor;
+  switch (status) {
+    case "Done":
+      statusColor = "bg-green-500";
+      break;
+    case "Progress":
+      statusColor = "bg-yellow-500";
+      break;
+    case "Incomplete":
+      statusColor = "bg-red-500";
+      break;
+    default:
+      statusColor = "bg-gray-500";
+  }
+
   return (
     <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <div className="flex items-center justify-center w-12 bg-emerald-500">
+      <div className={`flex items-center justify-center w-12 ${statusColor}`}>
         <svg
           className="w-6 h-6 text-white fill-current"
           viewBox="0 0 40 40"
