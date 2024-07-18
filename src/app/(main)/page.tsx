@@ -1,11 +1,23 @@
 import TodoForm from "@/components/Todo/TodoForm";
-// import TodoItem from "@/components/Todo/TodoItem";
 import TodoItemList from "@/components/Todo/TodoItemList";
+import { TodoItemProps } from "@/components/Todo/TodoItem";
 
-const todoItems = [
-  { title: "Sample 1", content: "Your account was registered!" },
-  { title: "Sample 2", content: "Your account was verified!" },
-  { title: "Sample 3", content: "Your account was updated!" },
+const todoItems: TodoItemProps[] = [
+  {
+    title: "Sample 1",
+    content: "Your account was registered!",
+    status: "Done",
+  },
+  {
+    title: "Sample 2",
+    content: "Your account was verified!",
+    status: "Progress",
+  },
+  {
+    title: "Sample 3",
+    content: "Your account was updated!",
+    status: "Incomplete",
+  },
 ];
 
 export default function Home() {

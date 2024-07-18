@@ -9,7 +9,7 @@ const TodoItemList: React.FC<ToDoITemListProps> = ({ data }) => {
 		<div>
 			{data.map((todoItem, index) => (
 				<div key={index} className="mt-2">
-					<TodoItem title={todoItem.title} content={todoItem.content}/>
+					<TodoItem title={todoItem.title} content={todoItem.content} status={ todoItem.status } />
 				</div>
 			))}
 		</div>
