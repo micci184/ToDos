@@ -21,8 +21,11 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="max-w-sm mx-auto">
-      <label className="block text-sm text-gray-500 dark:text-gray-300 mt-4">
+    <form
+      onSubmit={handleSubmit}
+      className="max-w-sm mx-auto px-6 sm:px-2 md:px-8 lg:px-10"
+    >
+      <label className="block text-sm text-gray-500 dark:text-gray-300 mt-8">
         Select status
       </label>
       <CustomSelect
