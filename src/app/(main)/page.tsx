@@ -6,22 +6,7 @@ import TodoItemList from "@/components/Todo/TodoItemList";
 import { TodoItemProps } from "@/components/Todo/TodoItem";
 
 export default function Home() {
-  const [todoItems, setTodoItems] = useState<TodoItemProps[]>([
-    {
-      title: "Sample 1",
-      content: "Your account was registered!",
-      status: "Done",
-    },
-    {
-      title: "Sample 2",
-      content: "Your account was verified!",
-      status: "Progress",
-    },
-    {
-      title: "Sample 3",
-      content: "Your account was updated!",
-      status: "Incomplete",
-    },
+  const [todoItems, setTodoItems] = useState<TodoItemProps[]>([    
   ]);
 
   const addTodo = (title: string, content: string) => {
