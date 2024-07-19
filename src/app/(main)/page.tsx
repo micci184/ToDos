@@ -1,16 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
+
 import TodoForm from "@/components/Todo/TodoForm";
+import { Status,TodoItemProps } from "@/components/Todo/TodoItem";
 import TodoItemList from "@/components/Todo/TodoItemList";
-import { TodoItemProps } from "@/components/Todo/TodoItem";
 
 export default function Home() {
   const [todoItems, setTodoItems] = useState<TodoItemProps[]>([    
   ]);
 
-  const addTodo = (title: string, content: string) => {
-    setTodoItems([...todoItems, { title, content, status: "Incomplete" }]);
+  const addTodo = (title: string, content: string, status: Status) => {
+    setTodoItems([...todoItems, { title, content, status }]);
   };
 
   return (
