@@ -1,4 +1,4 @@
-type Status = "Done" | "Progress" | "Incomplete";
+export type Status = "Done" | "Progress" | "Incomplete";
 
 export type TodoItemProps = {
   title: string;
@@ -41,6 +41,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ title, content, status }) => {
           </span>
           <p className="me-1 mb-0 text-gray-700">{title}</p>
           <p className="text-sm text-gray-600 dark:text-gray-200">{content}</p>
+          <p className="text-xs text-gray-400">Status: {status}</p>
         </div>
       </div>
     </div>
