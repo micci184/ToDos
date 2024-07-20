@@ -19,10 +19,10 @@ export default function Home() {
       <h1 className="text-center text-2xl text-slate-600 font-bold mb-4 pt-4">
         ToDos
       </h1>
-      <TodoItemList data={todoItems} />
-      <div className="mt-2">
+      <div className="mb-8">
         <TodoForm addTodo={addTodo} />
       </div>
+      <TodoItemList data={todoItems} />
     </div>
   );
 }

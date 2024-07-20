@@ -23,7 +23,7 @@ const TodoItem: React.FC<TodoItemProps> = ({ title, content, status }) => {
   }
 
   return (
-    <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
+    <div className="flex max-w-custom mx-auto overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800">
       <div className={`flex items-center justify-center w-12 ${statusColor}`}>
         <svg
           className="w-6 h-6 text-white fill-current"
