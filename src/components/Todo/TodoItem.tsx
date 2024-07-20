@@ -1,12 +1,16 @@
+import React from "react";
+import { FaTrash } from "react-icons/fa";
+
 export type Status = "Done" | "Progress" | "Incomplete";
 
 export type TodoItemProps = {
   title: string;
   content: string;
   status: Status;
+  deleteTodo?: () => void;
 };
 
-const TodoItem: React.FC<TodoItemProps> = ({ title, content, status }) => {
+const TodoItem: React.FC<TodoItemProps> = ({ title, content, status, deleteTodo }) => {
   let statusColor;
   switch (status) {
     case "Done":
@@ -34,12 +38,18 @@ const TodoItem: React.FC<TodoItemProps> = ({ title, content, status }) => {
         </svg>
       </div>
 
-      <div className="px-4 py-2 -mx-3">
+      <div className="flex-grow px-4 py-2 -mx-3">
         <div className="mx-3">
           <p className="me-1 mb-0 text-gray-700">{title}</p>
           <p className="text-sm text-gray-600 dark:text-gray-200">{content}</p>
           <p className="text-xs text-gray-400">Status: {status}</p>
         </div>
+      </div>
+
+      <div className="flex items-center px-4 py-2 ml-auto">
+        <button onClick={deleteTodo} className="text-gray-500">
+          <FaTrash size={20} />
+        </button>
       </div>
     </div>
   );

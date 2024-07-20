@@ -1,17 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
-
 import TodoForm from "@/components/Todo/TodoForm";
-import { Status,TodoItemProps } from "@/components/Todo/TodoItem";
+import { Status, TodoItemProps } from "@/components/Todo/TodoItem";
 import TodoItemList from "@/components/Todo/TodoItemList";
 
 export default function Home() {
-  const [todoItems, setTodoItems] = useState<TodoItemProps[]>([    
-  ]);
+  const [todoItems, setTodoItems] = useState<TodoItemProps[]>([]);
 
+  // Add Todo task
   const addTodo = (title: string, content: string, status: Status) => {
-    setTodoItems([...todoItems, { title, content, status }]);
+    setTodoItems([
+      ...todoItems,
+      {
+        title,
+        content,
+        status,
+        deleteTodo: () => deleteTodo(todoItems.length),
+      },
+    ]);
+  };
+
+  // Delete Todo task
+  const deleteTodo = (index: number) => {
+    setTodoItems(todoItems.filter((_, i) => i !== index));
   };
 
   return (
@@ -22,7 +34,7 @@ export default function Home() {
       <div className="mb-8">
         <TodoForm addTodo={addTodo} />
       </div>
-      <TodoItemList data={todoItems} />
+      <TodoItemList data={todoItems} deleteTodo={deleteTodo} />
     </div>
   );
 }
