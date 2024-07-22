@@ -1,4 +1,6 @@
-import { create } from 'zustand';
+import { create, StateCreator } from "zustand";
+import { persist, PersistOptions } from "zustand/middleware";
+
 export type Status = "Done" | "Progress" | "Incomplete";
 
 export type TodoItemProps = {
@@ -13,14 +15,26 @@ type Store = {
   deleteTodo: (index: number) => void;
 };
 
-export const useStore = create<Store>((set) => ({
-  todoItems: [],
-  addTodo: (title, content, status) =>
-    set((state) => ({
-      todoItems: [...state.todoItems, { title, content, status }],
-    })),
-  deleteTodo: (index) =>
-    set((state) => ({
-      todoItems: state.todoItems.filter((_, i) => i !== index),
-    })),
-}));
+type MyPersist = (
+  config: StateCreator<Store>,
+  options: PersistOptions<Store>
+) => StateCreator<Store>;
+
+export const useStore = create<Store>(
+  (persist as MyPersist)(
+    (set) => ({
+      todoItems: [],
+      addTodo: (title: string, content: string, status: Status) =>
+        set((state) => ({
+          todoItems: [...state.todoItems, { title, content, status }],
+        })),
+      deleteTodo: (index: number) =>
+        set((state) => ({
+          todoItems: state.todoItems.filter((_, i) => i !== index),
+        })),
+    }),
+    {
+      name: "todo-storage",
+    }
+  )
+);
