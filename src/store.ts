@@ -1,5 +1,4 @@
-import create from "zustand";
-
+import { create } from 'zustand';
 export type Status = "Done" | "Progress" | "Incomplete";
 
 export type TodoItemProps = {
