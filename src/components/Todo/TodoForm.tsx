@@ -1,12 +1,10 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useStore } from "@/store";
+
 import CustomSelect from "./CustomSelect";
 import { Status } from "./TodoItem";
-
-type TodoFormProps = {
-  addTodo: (title: string, content: string, status: Status) => void;
-};
 
 type FormValues = {
   title: string;
@@ -14,7 +12,8 @@ type FormValues = {
   status: Status;
 };
 
-const TodoForm: React.FC<TodoFormProps> = ({ addTodo }) => {
+const TodoForm: React.FC = () => {
+  const addTodo = useStore((state) => state.addTodo);
   const {
     register,
     handleSubmit,
