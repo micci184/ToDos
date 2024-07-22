@@ -1,9 +1,10 @@
 import React from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 
+import { useStore } from "@/store";
+
 import CustomSelect from "./CustomSelect";
 import { Status } from "./TodoItem";
-import { useStore } from "@/store";
 
 type FormValues = {
   title: string;
