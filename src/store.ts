@@ -24,7 +24,11 @@ export const useStore = create<Store>(
   (persist as MyPersist)(
     (set) => ({
       todoItems: [],
-      addTodo: (title: string, content: string, status: Status) =>
+      addTodo: (
+        title: string,
+        content: string,
+        status: Status = "Incomplete"
+      ) =>
         set((state) => ({
           todoItems: [...state.todoItems, { title, content, status }],
         })),
