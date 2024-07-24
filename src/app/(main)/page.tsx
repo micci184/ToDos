@@ -9,6 +9,7 @@ import { useStore } from "@/store";
 export default function Home() {
   const todoItems = useStore((state) => state.todoItems);
   const deleteTodo = useStore((state) => state.deleteTodo);
+  const updateTodo = useStore((state) => state.updateTodo);
 
   return (
     <div>
@@ -18,7 +19,11 @@ export default function Home() {
       <div className="mb-8">
         <TodoForm />
       </div>
-      <TodoItemList data={todoItems} deleteTodo={deleteTodo} />
+      <TodoItemList
+        data={todoItems}
+        deleteTodo={deleteTodo}
+        updateTodo={updateTodo}
+      />
     </div>
   );
 }

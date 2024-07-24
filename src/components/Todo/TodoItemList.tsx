@@ -3,9 +3,14 @@ import TodoItem, { TodoItemProps } from "./TodoItem";
 type TodoItemListProps = {
   data: Array<TodoItemProps>;
   deleteTodo: (index: number) => void;
+  updateTodo: (index: number) => void;
 };
 
-const TodoItemList: React.FC<TodoItemListProps> = ({ data, deleteTodo }) => {
+const TodoItemList: React.FC<TodoItemListProps> = ({
+  data,
+  deleteTodo,
+  updateTodo
+}) => {
   return (
     <div>
       {data.map((todoItem, index) => {
@@ -17,6 +22,7 @@ const TodoItemList: React.FC<TodoItemListProps> = ({ data, deleteTodo }) => {
               content={todoItem.content}
               status={todoItem.status}
               deleteTodo={() => deleteTodo(index)}
+              updateTodo={() => updateTodo(index)}
             />
           </div>
         );

@@ -8,9 +8,16 @@ export type TodoItemProps = {
   content: string;
   status: Status;
   deleteTodo?: () => void;
-};
+  updateTodo: () => void;
+}
 
-const TodoItem: React.FC<TodoItemProps> = ({ title, content, status, deleteTodo }) => {
+const TodoItem: React.FC<TodoItemProps> = ({
+  title,
+  content,
+  status,
+  deleteTodo,
+  updateTodo,
+}) => {
   let statusColor;
   switch (status) {
     case "Done":
@@ -51,6 +58,9 @@ const TodoItem: React.FC<TodoItemProps> = ({ title, content, status, deleteTodo 
           <FaTrash size={20} />
         </button>
       </div>
+      <button onClick={updateTodo} className="text-blue-500">
+        Update
+      </button>
     </div>
   );
 };
