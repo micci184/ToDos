@@ -1,5 +1,6 @@
-import TodoItem from "./TodoItem";
 import { TodoItemProps } from "@/store";
+
+import TodoItem from "./TodoItem";
 
 type TodoItemListProps = {
   data: Array<TodoItemProps>;

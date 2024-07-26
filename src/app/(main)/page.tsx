@@ -1,9 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
+
 import TodoForm from "@/components/Todo/TodoForm";
 import TodoItemList from "@/components/Todo/TodoItemList";
-import { useStore, TodoItemProps, Status } from "@/store";
+import {TodoItemProps, useStore } from "@/store";
 
 export default function Home() {
   const todoItems = useStore((state) => state.todoItems);
