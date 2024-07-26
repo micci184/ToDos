@@ -7,20 +7,14 @@ export type TodoItemProps = {
   title: string;
   content: string;
   status: Status;
-  deleteTodo?: () => void;
-  updateTodo?: () => void;
+  index?: number; // 追加
 };
 
 type Store = {
   todoItems: TodoItemProps[];
   addTodo: (title: string, content: string, status: Status) => void;
   deleteTodo: (index: number) => void;
-  updateTodo: (
-    index: number,
-    title: string,
-    content: string,
-    status: Status
-  ) => void;
+  updateTodo: (todo: TodoItemProps) => void;
 };
 
 type MyPersist = (
@@ -40,15 +34,10 @@ export const useStore = create<Store>(
         set((state) => ({
           todoItems: state.todoItems.filter((_, i) => i !== index),
         })),
-      updateTodo: (
-        index: number,
-        title: string,
-        content: string,
-        status: Status
-      ) =>
+      updateTodo: (updatedTodo: TodoItemProps) =>
         set((state) => ({
           todoItems: state.todoItems.map((todo, i) =>
-            i === index ? { ...todo, title, content, status } : todo
+            i === updatedTodo.index ? { ...todo, ...updatedTodo } : todo
           ),
         })),
     }),

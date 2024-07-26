@@ -1,9 +1,13 @@
 import React from "react";
 import { FaTrash } from "react-icons/fa";
+import { TodoItemProps, Status } from "@/store";
 
-import {TodoItemProps } from "@/store"; 
+type TodoItemComponentProps = TodoItemProps & {
+  deleteTodo?: () => void;
+  updateTodo: () => void;
+};
 
-const TodoItem: React.FC<TodoItemProps> = ({
+const TodoItem: React.FC<TodoItemComponentProps> = ({
   title,
   content,
   status,

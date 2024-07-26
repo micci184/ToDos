@@ -1,9 +1,12 @@
-import React from "react";
-import { SubmitHandler,useForm } from "react-hook-form";
-
-import { Status, useStore } from "@/store";
-
+import React, { useEffect } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 import CustomSelect from "./CustomSelect";
+import { TodoItemProps, Status } from "@/store";
+
+type TodoFormProps = {
+  addTodo: (title: string, content: string, status: Status) => void;
+  currentTodo: TodoItemProps | null; // 更新用のプロパティ
+};
 
 type FormValues = {
   title: string;
@@ -11,8 +14,7 @@ type FormValues = {
   status: Status;
 };
 
-const TodoForm: React.FC = () => {
-  const addTodo = useStore((state) => state.addTodo);
+const TodoForm: React.FC<TodoFormProps> = ({ addTodo, currentTodo }) => {
   const {
     register,
     handleSubmit,
@@ -24,16 +26,21 @@ const TodoForm: React.FC = () => {
 
   const statusValue = watch("status", "Incomplete");
 
+  useEffect(() => {
+    if (currentTodo) {
+      setValue("title", currentTodo.title);
+      setValue("content", currentTodo.content);
+      setValue("status", currentTodo.status);
+    }
+  }, [currentTodo, setValue]);
+
   const onSubmit: SubmitHandler<FormValues> = (data) => {
     addTodo(data.title, data.content, data.status);
     reset({ title: "", content: "", status: "Incomplete" });
   };
 
   return (
-    <form
-      onSubmit={handleSubmit(onSubmit)}
-      className="max-w-sm mx-auto px-2 sm:px-2 md:px-2 lg:px-2"
-    >
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-sm mx-auto px-4">
       <label className="block text-sm text-gray-500 dark:text-gray-300 mt-8">
         Select status
       </label>
@@ -65,7 +72,7 @@ const TodoForm: React.FC = () => {
         <p className="text-red-500">{errors.content.message}</p>
       )}
       <button className="w-full mt-6 px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-        Add
+        {currentTodo ? "Update" : "Add"}
       </button>
     </form>
   );
