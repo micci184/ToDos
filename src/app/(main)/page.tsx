@@ -4,7 +4,7 @@ import React from "react";
 
 import TodoForm from "@/components/Todo/TodoForm";
 import TodoItemList from "@/components/Todo/TodoItemList";
-import { useStore } from "@/store";
+import { useStore } from "@/store"; // 変更
 
 export default function Home() {
   const todoItems = useStore((state) => state.todoItems);

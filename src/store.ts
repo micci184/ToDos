@@ -7,6 +7,8 @@ export type TodoItemProps = {
   title: string;
   content: string;
   status: Status;
+  deleteTodo?: () => void;
+  updateTodo?: () => void;
 };
 
 type Store = {

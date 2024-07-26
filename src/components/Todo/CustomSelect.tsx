@@ -1,6 +1,6 @@
-import React, { useEffect,useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-import { Status } from "./TodoItem";
+import { Status } from "@/store";
 
 type CustomSelectProps = {
   value: Status;

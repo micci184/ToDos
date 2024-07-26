@@ -1,15 +1,22 @@
-import TodoItem, { TodoItemProps } from "./TodoItem";
+import { Status,TodoItemProps } from "@/store"; 
+
+import TodoItem from "./TodoItem";
 
 type TodoItemListProps = {
   data: Array<TodoItemProps>;
   deleteTodo: (index: number) => void;
-  updateTodo: (index: number) => void;
+  updateTodo: (
+    index: number,
+    title: string,
+    content: string,
+    status: Status
+  ) => void;
 };
 
 const TodoItemList: React.FC<TodoItemListProps> = ({
   data,
   deleteTodo,
-  updateTodo
+  updateTodo,
 }) => {
   return (
     <div>
@@ -22,7 +29,14 @@ const TodoItemList: React.FC<TodoItemListProps> = ({
               content={todoItem.content}
               status={todoItem.status}
               deleteTodo={() => deleteTodo(index)}
-              updateTodo={() => updateTodo(index)}
+              updateTodo={() =>
+                updateTodo(
+                  index,
+                  todoItem.title,
+                  todoItem.content,
+                  todoItem.status
+                )
+              }
             />
           </div>
         );
