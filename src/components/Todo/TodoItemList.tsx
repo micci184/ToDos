@@ -19,6 +19,7 @@ const TodoItemList: React.FC<TodoItemListProps> = ({
         return (
           <div key={index} className="mt-2">
             <TodoItem
+              index={index}
               title={todoItem.title}
               content={todoItem.content}
               status={todoItem.status}

@@ -5,7 +5,15 @@ import { TodoItemProps, Status } from "@/store";
 
 type TodoFormProps = {
   addTodo: (title: string, content: string, status: Status) => void;
-  currentTodo: TodoItemProps | null; // 更新用のプロパティ
+  updateTodo: (
+    index: number,
+    title: string,
+    content: string,
+    status: Status
+  ) => void;
+  currentTodo: TodoItemProps | null;
+  isEditing: boolean;
+  cancelEdit: () => void;
 };
 
 type FormValues = {
@@ -14,7 +22,13 @@ type FormValues = {
   status: Status;
 };
 
-const TodoForm: React.FC<TodoFormProps> = ({ addTodo, currentTodo }) => {
+const TodoForm: React.FC<TodoFormProps> = ({
+  addTodo,
+  updateTodo,
+  currentTodo,
+  isEditing,
+  cancelEdit,
+}) => {
   const {
     register,
     handleSubmit,
@@ -31,11 +45,18 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo, currentTodo }) => {
       setValue("title", currentTodo.title);
       setValue("content", currentTodo.content);
       setValue("status", currentTodo.status);
+    } else {
+      reset({ title: "", content: "", status: "Incomplete" });
     }
-  }, [currentTodo, setValue]);
+  }, [currentTodo, setValue, reset]);
 
   const onSubmit: SubmitHandler<FormValues> = (data) => {
-    addTodo(data.title, data.content, data.status);
+    if (isEditing && currentTodo?.index !== undefined) {
+      updateTodo(currentTodo.index, data.title, data.content, data.status);
+      cancelEdit();
+    } else {
+      addTodo(data.title, data.content, data.status);
+    }
     reset({ title: "", content: "", status: "Incomplete" });
   };
 
@@ -71,9 +92,20 @@ const TodoForm: React.FC<TodoFormProps> = ({ addTodo, currentTodo }) => {
       {errors.content && (
         <p className="text-red-500">{errors.content.message}</p>
       )}
-      <button className="w-full mt-6 px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
-        {currentTodo ? "Update" : "Add"}
-      </button>
+      <div className="flex space-x-2">
+        <button className="w-full mt-6 px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80">
+          {isEditing ? "Update" : "Add"}
+        </button>
+        {isEditing && (
+          <button
+            type="button"
+            onClick={cancelEdit}
+            className="w-full mt-6 px-6 py-2 font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-600 rounded-lg hover:bg-gray-500 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-80"
+          >
+            Cancel
+          </button>
+        )}
+      </div>
     </form>
   );
 };

@@ -4,17 +4,22 @@ import { persist, PersistOptions } from "zustand/middleware";
 export type Status = "Done" | "Progress" | "Incomplete";
 
 export type TodoItemProps = {
+  index?: number;
   title: string;
   content: string;
   status: Status;
-  index?: number; // 追加
 };
 
 type Store = {
   todoItems: TodoItemProps[];
   addTodo: (title: string, content: string, status: Status) => void;
   deleteTodo: (index: number) => void;
-  updateTodo: (todo: TodoItemProps) => void;
+  updateTodo: (
+    index: number,
+    title: string,
+    content: string,
+    status: Status
+  ) => void;
 };
 
 type MyPersist = (
@@ -34,10 +39,15 @@ export const useStore = create<Store>(
         set((state) => ({
           todoItems: state.todoItems.filter((_, i) => i !== index),
         })),
-      updateTodo: (updatedTodo: TodoItemProps) =>
+      updateTodo: (
+        index: number,
+        title: string,
+        content: string,
+        status: Status
+      ) =>
         set((state) => ({
           todoItems: state.todoItems.map((todo, i) =>
-            i === updatedTodo.index ? { ...todo, ...updatedTodo } : todo
+            i === index ? { ...todo, title, content, status } : todo
           ),
         })),
     }),
