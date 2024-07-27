@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTrash } from "react-icons/fa";
+import { FaEdit,FaTrash } from "react-icons/fa";
 
 export type Status = "Done" | "Progress" | "Incomplete";
 
@@ -54,14 +54,14 @@ const TodoItem: React.FC<TodoItemProps> = ({
         </div>
       </div>
 
-      <div className="flex items-center px-4 py-2 ml-auto">
-        <button onClick={deleteTodo} className="text-gray-500">
+      <div className="flex items-center px-4 py-2 ml-auto space-x-2">
+        <button onClick={updateTodo} className="text-blue-400">
+          <FaEdit size={20} />
+        </button>
+        <button onClick={deleteTodo} className="text-red-300">
           <FaTrash size={20} />
         </button>
       </div>
-      <button onClick={updateTodo} className="text-blue-500">
-        Update
-      </button>
     </div>
   );
 };
