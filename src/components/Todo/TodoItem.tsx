@@ -1,5 +1,5 @@
 import React from "react";
-import { FaTrash, FaEdit } from "react-icons/fa";
+import { FaEdit,FaTrash } from "react-icons/fa";
 
 export type Status = "Done" | "Progress" | "Incomplete";
 
