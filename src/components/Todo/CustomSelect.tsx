@@ -42,7 +42,7 @@ const CustomSelect: React.FC<CustomSelectProps> = ({
       <button
         type="button"
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
+        className="w-full mb-4 px-5 py-2.5 text-gray-700 bg-white border border-gray-200 rounded-lg shadow-sm focus:outline-none focus:ring focus:ring-blue-300"
       >
         {value}
       </button>
